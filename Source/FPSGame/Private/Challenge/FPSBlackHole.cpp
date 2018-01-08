@@ -48,9 +48,8 @@ void AFPSBlackHole::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 	TArray<UPrimitiveComponent*> OverlappingComponents;
 	EffectRadius->GetOverlappingComponents(OverlappingComponents);
-	for (int32 i = 0; i < OverlappingComponents.Num(); i++)
+	for (UPrimitiveComponent* OverlapComponent : OverlappingComponents)
 	{
-		UPrimitiveComponent* OverlapComponent = OverlappingComponents[i];
 		if (OverlapComponent && OverlapComponent->IsSimulatingPhysics())
 		{
 			OverlapComponent->AddRadialForce(GetActorLocation(), EffectRadius->GetScaledSphereRadius(), AttractionForce*-1, ERadialImpulseFalloff::RIF_Constant,true);
